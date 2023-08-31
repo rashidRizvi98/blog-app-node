@@ -12,7 +12,7 @@ export class User extends Model<IUser,IUserAttributes>{
     @Column({
         type: DataType.UUID,
         defaultValue: DataType.UUIDV4,
-        unique: true
+        unique: true,
     })    
     id!: string;
 
@@ -25,7 +25,6 @@ export class User extends Model<IUser,IUserAttributes>{
     email!: string;
 
     @Column({
-        primaryKey: true,
         type: DataType.STRING,
         allowNull: false
     })
@@ -41,8 +40,6 @@ export class User extends Model<IUser,IUserAttributes>{
         type: DataType.STRING,
         allowNull: false,
     })
-    lastName!: number;
-
-
+    lastName!: string;
 
 }
