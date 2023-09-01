@@ -1,13 +1,15 @@
-import { Model, Column, DataType, Table, PrimaryKey, HasMany, Length } from "sequelize-typescript";
+import { Model, Column, DataType, Table, PrimaryKey, HasMany, Length, ForeignKey } from "sequelize-typescript";
 import { Optional } from "sequelize";
 import { IUser } from "../../models/user";
+import { IBlog } from "../../models/blog";
+import { User } from "./user";
 
-interface IUserAttributes extends Optional<IUser,'id'> {}
+interface IBlogAttributes extends Optional<IBlog,'id'> {}
 
 @Table({
-    tableName: "users"
+    tableName: "blogs"
 })
-export class User extends Model<IUser,IUserAttributes>{
+export class Blog extends Model<IBlog,IBlogAttributes>{
 
     @Column({
         primaryKey: true,
@@ -20,26 +22,20 @@ export class User extends Model<IUser,IUserAttributes>{
     @Column({
         type: DataType.STRING,
         allowNull: false,
-        unique: true
     })
-    email!: string;
+    title!: string;
 
     @Column({
         type: DataType.STRING,
         allowNull: false
     })
-    password!: string;
+    content!: string;
 
+    @ForeignKey(() => User)
     @Column({
-        type: DataType.STRING,
+        type: DataType.UUID,
         allowNull: false,
     })
-    firstName!: string;
-
-    @Column({
-        type: DataType.STRING,
-        allowNull: false,
-    })
-    lastName!: string;
+    authorId!: string;
 
 }

@@ -4,7 +4,6 @@ import { jwtConfig } from "../config/config";
 
 export const verifyToken = (req, res, next) => {
     let token = req?.session?.token;
-    console.log("req",req.session)
   
     if (!token) {
       return res.status(403).send({
@@ -21,7 +20,6 @@ export const verifyToken = (req, res, next) => {
                   });
                 }
                 req.userId = decoded.id;
-                console.log("req.userId",req.userId)
                 next();
                });
   };

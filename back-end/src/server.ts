@@ -7,6 +7,7 @@ import { HttpError } from './helpers/custom-error';
 import { initializeDatabase } from './database/database';
 import cookieSession from 'cookie-session';
 import { verifyToken } from './middlewares/auth';
+import blogRouter from './routes/blog-route';
 
 const logger = getLogger('SERVER');
 const app: Express = express();
@@ -36,6 +37,7 @@ app.get('/',[verifyToken],(req,res) => {
 
 app.use("/users",userRouter);
 
+app.use("/blogs",blogRouter);
 
 app.use(
   (

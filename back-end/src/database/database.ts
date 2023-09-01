@@ -3,6 +3,7 @@ import { createdb } from "pgtools";
 import { getLogger } from "../helpers/logger";
 import { dbConfig } from "../config/config";
 import { User } from "./models/user";
+import { Blog } from "./models/blog";
 
 const logger = getLogger('DATABASE');
 
@@ -14,7 +15,7 @@ export const connection = new Sequelize({
     dialect: "postgres",
     database: dbConfig.name,
     logging: false,
-    models: [User]
+    models: [User, Blog]
 })
 
 export const createDatabase = async (dbName: string) => {
