@@ -13,7 +13,8 @@ const logger = getLogger('SERVER');
 const app: Express = express();
 
 app.use(cors({
-    origin: fe_url
+    origin: fe_url,
+    credentials: true
   }));
 
 
