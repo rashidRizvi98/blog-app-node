@@ -9,3 +9,11 @@ export const dbConfig = {
     host: "localhost",
     name: "login-system"
   };
+
+export const jwtConfig = {
+  secret: "gfdgsfsdgsafhfc"
+}
+
+export const cookieConfig = {
+  secret: "hfggsvcvnhgerersdgfdg"
+}

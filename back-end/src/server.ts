@@ -1,10 +1,12 @@
 import  express, { Express } from 'express';
 import cors from 'cors';
 import { getLogger } from "./helpers/logger";
-import { fe_url, port } from './config/config';
+import { cookieConfig, fe_url, port } from './config/config';
 import userRouter from './routes/user-route';
 import { HttpError } from './helpers/custom-error';
 import { initializeDatabase } from './database/database';
+import cookieSession from 'cookie-session';
+import { verifyToken } from './middlewares/auth';
 
 const logger = getLogger('SERVER');
 const app: Express = express();
@@ -13,11 +15,24 @@ app.use(cors({
     origin: fe_url
   }));
 
-app.get('/',(req,res) => {
-    res.send("Hello World");
+
+app.use(express.json());
+
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use(
+  cookieSession({
+    name: "blog-app-session",
+    keys: [cookieConfig.secret],
+    httpOnly: true,
+  })
+);
+
+app.get('/',[verifyToken],(req,res) => {
+  res.send("Hello World");
 });
 
-app.use(express.json())
 
 app.use("/users",userRouter);
 
