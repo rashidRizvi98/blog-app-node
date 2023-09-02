@@ -26,7 +26,7 @@ export class Blog extends Model<IBlog,IBlogAttributes>{
     title!: string;
 
     @Column({
-        type: DataType.STRING,
+        type: DataType.TEXT,
         allowNull: false
     })
     content!: string;
