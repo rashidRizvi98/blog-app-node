@@ -36,7 +36,7 @@ Navigate to my blogs page to create a blog.
 
 ### Features available
 
-register/login
-jwt authentication
-crud blog
-pagination
+register/login <br>
+jwt authentication <br>
+crud blog <br>
+pagination <br>
