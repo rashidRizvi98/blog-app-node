@@ -21,15 +21,15 @@ const BlogCard: React.FC<IBlogCardProps> = ({ id, title, content, author, isEdit
         <p className="card-text">By {`${author.firstName} ${author.lastName}`}</p>
         {isEditable && (
           <>
-            <button className="btn btn-warning" onClick={onEditClick}>
+            <button className="btn btn-warning mx-2 my-2" onClick={onEditClick}>
               Edit
             </button>
-            <button className="btn btn-danger" onClick={onDeleteClick}>
+            <button className="btn btn-danger mx-2 my-2" onClick={onDeleteClick}>
               Delete
             </button>
           </>
         )}
-        <Link className="btn btn-primary" href={`/blogs/${id}`}>
+        <Link className="btn btn-primary mx-2 my-2" href={`/blogs/${id}`}>
           Read More
         </Link>
       </div>

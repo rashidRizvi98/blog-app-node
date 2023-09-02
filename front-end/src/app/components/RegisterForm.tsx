@@ -81,10 +81,11 @@ const RegisterForm = () => {
           required
         />
       </div>
-      
+      <div className='d-flex justify-content-center my-4'>
       <button type="submit" className="btn btn-primary">
         Register
       </button>
+      </div>
     </form>
   );
 };

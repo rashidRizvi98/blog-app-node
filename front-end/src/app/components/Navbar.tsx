@@ -2,13 +2,23 @@
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 
 export default function AppNavbar () {
 
   const [loggedIn, setLoggedIn] = useState(false);
+  const router = useRouter();
+  const pathname = usePathname();
 
   useEffect(()=> {
-    setLoggedIn(!!Cookies.get('blog-app-session'))
+    const userIsAuthenticated = !!Cookies.get('blog-app-session');
+    setLoggedIn(userIsAuthenticated);
+
+    if (!userIsAuthenticated && pathname.includes('/my')) {
+      router.replace('/login');
+    }
+      
   },[loggedIn]);
 
   const handleSignout = async () => {
@@ -34,9 +44,12 @@ export default function AppNavbar () {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/blogs/my">
-                  My Blogs
-                </Link>
+                {
+                  loggedIn &&
+                  <Link className="nav-link" href="/blogs/my">
+                    My Blogs
+                  </Link>
+                }
               </li>
               {
                 loggedIn  ?

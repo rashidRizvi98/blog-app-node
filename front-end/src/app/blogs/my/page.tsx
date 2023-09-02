@@ -35,7 +35,7 @@ export default function MyBlogs() {
       await updateBlog(blog);
       fetchBlogs();
     } catch (error) {
-      
+
     }
     
   };
@@ -54,8 +54,13 @@ export default function MyBlogs() {
   },[]);
 
   const fetchBlogs =async () => {
-    const res = await getMyBlogs(); 
-    setBlogList(res.data);
+    try {
+      const res = await getMyBlogs(); 
+      setBlogList(res.data);
+        
+    } catch (error) {
+
+    }
   }
 
   return (
@@ -63,10 +68,13 @@ export default function MyBlogs() {
       <AppNavbar />     
       <main className="container">
         <h1 className='my-3 text-center'>My BLogs</h1>
-        <div className='row'>
-          <button className="btn btn-primary" onClick={() => setShowModal(true)}>
+        <div className='row mb-5'>
+          <div className="col-md-4">
+          <button className="btn btn-primary btn-small" onClick={() => setShowModal(true)}>
             Create Blog
           </button>
+          </div>
+
         </div>
         <div className="row">
           {blogList.map((blog) => (
