@@ -34,7 +34,7 @@ FE will be available at available at http://localhost:3000
 
 Navigate to my blogs page to create a blog. 
 
-###Features available
+### Features available
 
 register/login
 jwt authentication
