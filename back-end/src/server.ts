@@ -27,7 +27,7 @@ app.use(
   cookieSession({
     name: "blog-app-session",
     keys: [cookieConfig.secret],
-    httpOnly: true,
+    httpOnly: false,
   })
 );
 
