@@ -13,5 +13,10 @@ export interface IBlogCreateResponse {
   }
 
 export interface IBlogListResponse {
-    data: IBlog[];
+    data: IPaginatedBlogs;
+}
+
+export interface IPaginatedBlogs {
+    blogs: IBlog[];
+    totalElements: number;
 }

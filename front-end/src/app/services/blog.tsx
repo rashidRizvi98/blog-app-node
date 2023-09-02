@@ -13,8 +13,8 @@ export const createBlog = async(payload: Partial<IBlog>) => {
     return data as IBlogCreateResponse;
 }
 
-export const getAllBlogs = async() => {
-    const response = await axios.get(`${baseApiUrl}/blogs`);
+export const getAllBlogs = async({ page, size }: { page: number, size: number }) => {
+    const response = await axios.get(`${baseApiUrl}/blogs?page=${page}&size=${size}`);
     const data = response.data;
 
     if (response.status != 200) {
