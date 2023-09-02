@@ -28,7 +28,6 @@ const RegisterForm = () => {
     } catch (error) {
       
     }
-    console.log('Registration data:', formData);
   };
 
   return (

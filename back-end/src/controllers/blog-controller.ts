@@ -8,7 +8,7 @@ const logger = getLogger("BLOG CONTROLLER")
 
 export const createBlog: RequestHandler = async (req: Request & { userId: string },res,next) => {
 
-    logger.info(`createBlog: ${req.body}`);
+    logger.info(`createBlog: ${JSON.stringify(req.body, null, 2)}`);
 
     const payload : IBlog = req.body;
     payload.authorId = req.userId;
@@ -23,7 +23,7 @@ export const createBlog: RequestHandler = async (req: Request & { userId: string
 }
 
 export const findBlog: RequestHandler = async (req: Request, res: Response, next: NextFunction) => {
-    logger.info('findBook: ', req.params);
+    logger.info('findBook: ', JSON.stringify(req.params, null, 2));
     try {
         const { id } = req.params;
         const blog = await blogService.findBlog(id);
