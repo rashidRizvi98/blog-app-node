@@ -39,7 +39,18 @@ export const findBlog: RequestHandler = async (req: Request, res: Response, next
 
 export const findAllBlogs =async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const blogs = await blogService.findAllBlogs();
+        const { page,size } = req.query;
+        let pageSize = Number(size);
+        let pageNumber = Number(page);
+        if (Number(size) > 10 || pageSize == null) {
+             pageSize = 10;
+        }
+
+        if (page == null) {
+            pageNumber = 1;
+        }
+
+        const blogs = await blogService.findAllBlogs({ page: pageNumber, size: pageSize });
         return res.status(200)
         .json({ data: blogs });
     } catch (error) {

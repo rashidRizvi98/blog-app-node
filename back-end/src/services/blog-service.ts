@@ -1,5 +1,7 @@
 import { Blog } from "../database/models/blog";
 import { User } from "../database/models/user";
+import { paginate } from "../helpers/pagination";
+import { Pagination } from "../models/Pagination";
 import { IBlog } from "../models/blog";
 
 const createBlog = async (payload: IBlog)=> {
@@ -15,10 +17,19 @@ const findBlog = async (blogId: string) => {
     });
 }
 
-const findAllBlogs = async () => {
-    return Blog.findAll({
-        include: User
-    });
+const findAllBlogs = async ({ page, size}: Pagination) => {
+    const res = await Blog.findAndCountAll(
+        paginate(
+          {
+            include: User
+          },
+          { page, size },
+        ),
+      );
+    return {
+        blogs: res.rows,
+        totalElements: res.count
+      }
 } 
 
 const findAllUserBlogs = async (authorId: string) => {
