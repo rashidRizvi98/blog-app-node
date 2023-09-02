@@ -4,12 +4,7 @@ import { IBlog, IBlogCreateResponse, IBlogListResponse } from "../models/blog";
 axios.defaults.withCredentials = true;
 
 export const createBlog = async(payload: Partial<IBlog>) => {
-    const response = await axios.post(`${baseApiUrl}/blogs`, payload,{
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        withCredentials: true
-    });
+    const response = await axios.post(`${baseApiUrl}/blogs`, payload);
     const data = response.data;
 
     if (response.status != 201) {
