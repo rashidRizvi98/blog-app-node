@@ -6,12 +6,22 @@ import { IUser } from "../models/user";
 import userService from "../services/user-service";
 import { User } from "../database/models/user";
 import { jwtConfig } from "../config/config";
+import { validationResult } from "express-validator";
 
 const logger = getLogger("USER CONTROLLER")
 
 export const registerUser: RequestHandler = async (req,res,next) => {
 
-    const payload : IUser = req.body;
+  const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        logger.error(errors.array());
+        return res.status(400).json({ errors: errors.array() });
+    }
+
+
+  const payload : IUser = req.body;
+
     try {
         const [registeredUser ,created] = await userService.registerUser(payload);
         if (created) {
