@@ -17,7 +17,6 @@ to run Postgres as a docker container please run following command in a terminal
 Nextjs <br>
 Bootstrap <br>
 
-JWT is used for authentication
 
 to clone the code please run
 
@@ -32,3 +31,12 @@ within root folders of each backend and frontend projects, please run following 
 BE will be available at available at http://localhost:4000
 
 FE will be available at available at http://localhost:3000
+
+Navigate to my blogs page to create a blog. 
+
+###Features available
+
+register/login
+jwt authentication
+crud blog
+pagination
