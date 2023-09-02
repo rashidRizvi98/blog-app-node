@@ -1,5 +1,4 @@
 "use client"; 
-// components/RegisterForm.tsx
 import { useState } from 'react';
 import { registerUser } from '../services/user';
 import { useRouter } from 'next/navigation';
@@ -23,7 +22,6 @@ const RegisterForm = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Implement registration logic here, e.g., API call
     try {
       await registerUser(formData);
       router.push("login")

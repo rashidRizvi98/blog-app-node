@@ -1,5 +1,5 @@
 "use client"; 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
 
 interface BlogModalProps {
@@ -15,7 +15,7 @@ const BlogModal: React.FC<BlogModalProps> = ({
   onSave,
   blogData,
 }) => {
-  const [formData, setFormData] = useState(blogData || { title: '', content: '' });
+  const [formData, setFormData] = useState({ title: '', content: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -23,9 +23,21 @@ const BlogModal: React.FC<BlogModalProps> = ({
   };
 
   const handleSave = () => {
-    onSave(formData);
-    onHide();
+    if (blogData && blogData.id) {     
+      onSave({ ...formData, id: blogData.id });
+    } else {      
+      onSave(formData);
+    }
+      onHide();
   };
+
+  useEffect(() => {
+    if (blogData) {
+      setFormData({ title: blogData.title, content: blogData.content });
+    } else {
+      setFormData({ title: '', content: '' });
+    }
+  }, [blogData]);
 
   return (
     <Modal show={show} onHide={onHide} centered>

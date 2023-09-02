@@ -1,7 +1,7 @@
 "use client"; 
 import { useEffect, useState } from 'react';
 import { IBlog } from '../../models/blog';
-import { createBlog, getMyBlogs } from '../../services/blog';
+import { createBlog, getMyBlogs, updateBlog } from '../../services/blog';
 import AppNavbar from '../../components/Navbar';
 import BlogCard from '../../components/BlogCard';
 import BlogModal from '../../components/BlogModal';
@@ -12,6 +12,7 @@ export default function MyBlogs() {
 
   const [blogList, setBlogList] = useState<IBlog[]>([]);
   const [showModal, setShowModal] = useState(false);
+  const [blogToEdit, setBlogToEdit] = useState<IBlog | null>(null);
 
   const handleCreateBlog = async (blogData: IBlog) => {
     
@@ -23,7 +24,20 @@ export default function MyBlogs() {
     }
   };
 
-  const handleEditBlog = (blogData: IBlog) => {
+  const handleEditBlog =  async (blogData: IBlog) => {
+    try {
+      const blog = { 
+        id: blogData.id,
+        title: blogData.title,
+        content: blogData.content
+      }
+  
+      await updateBlog(blog);
+      fetchBlogs();
+    } catch (error) {
+      
+    }
+    
   };
 
   useEffect(()=> {
@@ -48,13 +62,26 @@ export default function MyBlogs() {
         <div className="row">
           {blogList.map((blog) => (
             <div key={blog.id} className="col-md-4">
-              <BlogCard {...blog} />
+              <BlogCard 
+               id={blog.id}
+               title={blog.title}
+               content={blog.content}
+               author={blog.author}
+               isEditable={ true }
+               onEditClick={() => {
+                 setBlogToEdit(blog);
+                 setShowModal(true);
+               }}
+              />
             </div>
           ))}
         </div>
         <BlogModal
           show={showModal}
-          onHide={() => setShowModal(false)}
+          onHide={() => {
+            setShowModal(false);
+            setBlogToEdit(null);
+          }}
           onSave={(blogData) => {
             if (blogData.id) {
               handleEditBlog(blogData);
@@ -62,6 +89,7 @@ export default function MyBlogs() {
               handleCreateBlog(blogData);
             }
           }}
+          blogData={blogToEdit}
         />
       </main>  
     </div>

@@ -42,3 +42,13 @@ export const getBlog = async(blogId: string) => {
     }
     return data as IBlogCreateResponse;
 }
+
+export const updateBlog = async(payload: Partial<IBlog>) => {
+    const response = await axios.put(`${baseApiUrl}/blogs`, payload);
+    const data = response.data;
+
+    if (response.status != 200) {
+        return Promise.reject(response);
+    }
+    return data as IBlogCreateResponse;
+}
