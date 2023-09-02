@@ -68,3 +68,14 @@ export const updateUserBlog =async (req: Request & { userId: string }, res: Resp
         return next(error);       
     }
 }
+
+export const deleteBlog =async (req: Request & { userId: string }, res: Response, next: NextFunction) => {
+    try {
+        const { id } = req.params;
+        const blog = await blogService.deleteBlog(id, req.userId);
+        return res.status(200)
+        .json({ data: blog });
+    } catch (error) {
+        return next(error);       
+    }
+}

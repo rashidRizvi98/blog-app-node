@@ -29,10 +29,11 @@ const findAllUserBlogs = async (authorId: string) => {
         include: User
     });
 }
-const deleteBlog = async (blogId: string) => {
+const deleteBlog = async (blogId: string,authorId: string) => {
     return Blog.destroy({
         where: {
-            id: blogId
+            id: blogId,
+            authorId
         }
     });
 }
