@@ -1,7 +1,25 @@
-
+"use client"; 
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import Cookies from 'js-cookie';
 
 export default function AppNavbar () {
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(()=> {
+    setLoggedIn(!!Cookies.get('blog-app-session'))
+  },[loggedIn]);
+
+  const handleSignout = async () => {
+    try {
+      Cookies.remove('blog-app-session');
+      setLoggedIn(false);
+    } catch (error) {
+      
+    }
+  }
+
   return (
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
         <div className="container">
@@ -20,9 +38,19 @@ export default function AppNavbar () {
                   My Blogs
                 </Link>
               </li>
-              <li className="nav-item">
-                <a href="/logout" className="nav-link">Sign Out</a>
-              </li>
+              {
+                loggedIn  ?
+                <li className="nav-item">
+                  <button className="nav-link" onClick={handleSignout} >
+                    Sign out
+                  </button>
+                </li> :
+                <li className="nav-item">
+                  <Link className="nav-link" href="/login">
+                    Sign in
+                  </Link>   
+                </li>
+              }              
             </ul>
           </div>
         </div>

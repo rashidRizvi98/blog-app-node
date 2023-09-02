@@ -50,6 +50,7 @@ app.use(
     if (err instanceof HttpError) {
       res.status(err.statusCode).json({ message: err.message });
     } else {
+      logger.error('error',err)
       res.status(500).json({ message: 'Internal server error' });
     }
   }
