@@ -52,3 +52,13 @@ export const updateBlog = async(payload: Partial<IBlog>) => {
     }
     return data as IBlogCreateResponse;
 }
+
+export const deleteBlog = async(blogId: string) => {
+    const response = await axios.delete(`${baseApiUrl}/blogs/${blogId}`);
+    const data = response.data;
+
+    if (response.status != 200) {
+        return Promise.reject(response);
+    }
+    return data as IBlogCreateResponse;
+}

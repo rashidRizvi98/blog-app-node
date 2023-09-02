@@ -1,7 +1,7 @@
 "use client"; 
 import { useEffect, useState } from 'react';
 import { IBlog } from '../../models/blog';
-import { createBlog, getMyBlogs, updateBlog } from '../../services/blog';
+import { createBlog, deleteBlog, getMyBlogs, updateBlog } from '../../services/blog';
 import AppNavbar from '../../components/Navbar';
 import BlogCard from '../../components/BlogCard';
 import BlogModal from '../../components/BlogModal';
@@ -40,6 +40,15 @@ export default function MyBlogs() {
     
   };
 
+  const handleDeleteBlog = async (id: string) => {
+    try {
+      await deleteBlog(id);
+      fetchBlogs();
+    } catch (error) {
+      
+    }
+  };
+
   useEffect(()=> {
     fetchBlogs();
   },[]);
@@ -72,6 +81,7 @@ export default function MyBlogs() {
                  setBlogToEdit(blog);
                  setShowModal(true);
                }}
+               onDeleteClick={() => handleDeleteBlog(blog.id)}
               />
             </div>
           ))}
