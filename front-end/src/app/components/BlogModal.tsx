@@ -28,6 +28,7 @@ const BlogModal: React.FC<BlogModalProps> = ({
     } else {      
       onSave(formData);
     }
+    setFormData({ title: '', content: '' });
       onHide();
   };
 
