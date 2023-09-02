@@ -45,11 +45,18 @@ export default function AppNavbar () {
                     Sign out
                   </button>
                 </li> :
-                <li className="nav-item">
-                  <Link className="nav-link" href="/login">
-                    Sign in
-                  </Link>   
-                </li>
+                <>
+                  <li className="nav-item">
+                    <Link className="nav-link" href="/login">
+                      Sign in
+                    </Link>   
+                  </li>
+                  <li className="nav-item">
+                    <Link className="nav-link" href="/register">
+                      Sign up
+                    </Link>   
+                  </li>
+                </>
               }              
             </ul>
           </div>
