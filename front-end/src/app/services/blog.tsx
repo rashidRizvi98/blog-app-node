@@ -1,6 +1,6 @@
 import axios from "axios";
 import { baseApiUrl } from "../config/config";
-import { IBlog, IBlogCreateResponse, IBlogListResponse } from "../models/blog";
+import { IBlog, IBlogCreateResponse, IBlogListResponse, IPaginatedBlogListResponse } from "../models/blog";
 axios.defaults.withCredentials = true;
 
 export const createBlog = async(payload: Partial<IBlog>) => {
@@ -20,7 +20,7 @@ export const getAllBlogs = async({ page, size }: { page: number, size: number })
     if (response.status != 200) {
         return Promise.reject(response);
     }
-    return data as IBlogListResponse;
+    return data as IPaginatedBlogListResponse;
 }
 
 export const getMyBlogs = async() => {

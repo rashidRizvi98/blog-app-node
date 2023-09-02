@@ -13,6 +13,9 @@ export interface IBlogCreateResponse {
   }
 
 export interface IBlogListResponse {
+    data: IBlog[];
+}
+export interface IPaginatedBlogListResponse {
     data: IPaginatedBlogs;
 }
 
