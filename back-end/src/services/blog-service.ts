@@ -1,4 +1,5 @@
 import { Blog } from "../database/models/blog";
+import { User } from "../database/models/user";
 import { IBlog } from "../models/blog";
 
 const createBlog = async (payload: IBlog)=> {
@@ -6,11 +7,18 @@ const createBlog = async (payload: IBlog)=> {
  }
 
 const findBlog = async (blogId: string) => {
-    return Blog.findByPk(blogId);
+    return Blog.findOne({
+        where: {
+            id : blogId,
+        },
+        include: User
+    });
 }
 
 const findAllBlogs = async () => {
-    return Blog.findAll();
+    return Blog.findAll({
+        include: User
+    });
 } 
 
 const findAllUserBlogs = async (authorId: string) => {

@@ -1,4 +1,4 @@
-import { Model, Column, DataType, Table, PrimaryKey, HasMany, Length, ForeignKey } from "sequelize-typescript";
+import { Model, Column, DataType, Table, PrimaryKey, HasMany, Length, ForeignKey, HasOne, BelongsTo } from "sequelize-typescript";
 import { Optional } from "sequelize";
 import { IUser } from "../../models/user";
 import { IBlog } from "../../models/blog";
@@ -38,4 +38,6 @@ export class Blog extends Model<IBlog,IBlogAttributes>{
     })
     authorId!: string;
 
+    @BelongsTo(() => User)
+    author: User;
 }

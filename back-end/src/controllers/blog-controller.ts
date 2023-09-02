@@ -36,3 +36,13 @@ export const findBlog: RequestHandler = async (req: Request, res: Response, next
         return next(error);       
     }
 }
+
+export const findAllBlogs =async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const blogs = await blogService.findAllBlogs();
+        return res.status(200)
+        .json({ data: blogs });
+    } catch (error) {
+        return next(error);       
+    }
+}
