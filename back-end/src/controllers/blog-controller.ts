@@ -46,3 +46,13 @@ export const findAllBlogs =async (req: Request, res: Response, next: NextFunctio
         return next(error);       
     }
 }
+
+export const findUserBlogs =async (req: Request & { userId: string }, res: Response, next: NextFunction) => {
+    try {
+        const blogs = await blogService.findAllUserBlogs(req.userId);
+        return res.status(200)
+        .json({ data: blogs });
+    } catch (error) {
+        return next(error);       
+    }
+}

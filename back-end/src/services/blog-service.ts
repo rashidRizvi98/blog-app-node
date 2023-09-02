@@ -25,7 +25,8 @@ const findAllUserBlogs = async (authorId: string) => {
     return Blog.findAll({
         where:{
             authorId
-        }
+        },
+        include: User
     });
 }
 const deleteBlog = async (blogId: string) => {
