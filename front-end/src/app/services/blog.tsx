@@ -1,6 +1,7 @@
 import axios from "axios";
 import { baseApiUrl } from "../config/config";
 import { IBlog, IBlogCreateResponse, IBlogListResponse } from "../models/blog";
+axios.defaults.withCredentials = true;
 
 export const createBlog = async(payload: Partial<IBlog>) => {
     const response = await axios.post(`${baseApiUrl}/blogs`, payload,{
@@ -19,6 +20,16 @@ export const createBlog = async(payload: Partial<IBlog>) => {
 
 export const getAllBlogs = async() => {
     const response = await axios.get(`${baseApiUrl}/blogs`);
+    const data = response.data;
+
+    if (response.status != 200) {
+        return Promise.reject(response);
+    }
+    return data as IBlogListResponse;
+}
+
+export const getMyBlogs = async() => {
+    const response = await axios.get(`${baseApiUrl}/blogs/my`);
     const data = response.data;
 
     if (response.status != 200) {

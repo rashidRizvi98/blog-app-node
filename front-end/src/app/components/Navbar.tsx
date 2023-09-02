@@ -34,7 +34,7 @@ export default function AppNavbar () {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link className="nav-link" href="/my-blogs">
+                <Link className="nav-link" href="/blogs/my">
                   My Blogs
                 </Link>
               </li>
