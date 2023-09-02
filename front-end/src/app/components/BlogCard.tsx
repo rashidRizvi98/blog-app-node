@@ -17,7 +17,7 @@ const BlogCard: React.FC<IBlogCardProps> = ({ id, title, content, author, isEdit
     <div className="card mb-3">
       <div className="card-body">
         <h5 className="card-title">{title}</h5>
-        <p className="card-text">{content}</p>
+        <p className="card-text">{ content.length > 30 ?`${content.slice(0, 30)}...` : content}</p>
         <p className="card-text">By {`${author.firstName} ${author.lastName}`}</p>
         {isEditable && (
           <>

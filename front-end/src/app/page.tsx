@@ -26,7 +26,7 @@ export default function Home() {
     <div>
       <AppNavbar />     
       <main className="container">
-        <h1 className='my-3'>Welcome to the Blog App</h1>
+        <h1 className='my-3 text-center'>Welcome to the Blog App</h1>
         <div className="row">
           {blogList.map((blog) => (
             <div key={blog.id} className="col-md-4">
