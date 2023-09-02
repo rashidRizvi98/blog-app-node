@@ -38,7 +38,10 @@ const deleteBlog = async (blogId: string) => {
 }
 
 const updateBlog =async (payload: IBlog) => {
-    return Blog.update(payload, { where: { id: payload.id } });
+    const blog = await Blog.findOne({
+        where: { id: payload.id, authorId: payload.authorId }
+    });
+    return blog.update(payload);
 }
 
  export default { 

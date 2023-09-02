@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { createBlog, findAllBlogs, findBlog, findUserBlogs } from "../controllers/blog-controller";
+import { createBlog, findAllBlogs, findBlog, findUserBlogs, updateUserBlog } from "../controllers/blog-controller";
 import { verifyToken } from "../middlewares/auth";
 
 const blogRouter = Router();
@@ -11,5 +11,7 @@ blogRouter.get("/", findAllBlogs);
 blogRouter.get("/my", [verifyToken], findUserBlogs);
 
 blogRouter.get("/:id", findBlog);
+
+blogRouter.put("/", [verifyToken], updateUserBlog);
 
 export default blogRouter;

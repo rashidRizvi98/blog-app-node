@@ -56,3 +56,15 @@ export const findUserBlogs =async (req: Request & { userId: string }, res: Respo
         return next(error);       
     }
 }
+
+export const updateUserBlog =async (req: Request & { userId: string }, res: Response, next: NextFunction) => {
+    try {
+        const payload : IBlog = req.body;
+        payload.authorId = req.userId;
+        const blog = await blogService.updateBlog(payload);
+        return res.status(200)
+        .json({ data: blog });
+    } catch (error) {
+        return next(error);       
+    }
+}
